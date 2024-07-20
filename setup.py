@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="llm_nexus",
+    name="llm-nexus",  # This is the PyPI distribution name
     version="0.1.0",
     author="Daniel Tedesco",
     author_email="dtedesco1@gmail.com",
