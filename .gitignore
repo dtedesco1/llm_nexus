@@ -1,0 +1,11 @@
+# Ignore pycache files
+__pycache__/
+
+# Ignore .ds_store files
+.DS_Store
+
+# Ignore .egg-info files
+*.egg-info/
+
+# Ignore logs
+logs/

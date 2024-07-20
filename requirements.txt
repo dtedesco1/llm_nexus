@@ -1,0 +1,4 @@
+pydantic
+anthropic
+google-generativeai
+openai

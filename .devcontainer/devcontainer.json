@@ -1,0 +1,27 @@
+{
+    "name": "LLM Nexus Development",
+    "dockerFile": "Dockerfile",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "always"
+                },
+                "extensions": [
+                    "ms-python.python",
+                    "ms-python.vscode-pylance",
+                    "ms-python.black-formatter",
+                    "ms-python.isort"
+                ]
+            }
+        }
+    },
+    "forwardPorts": [],
+    "postCreateCommand": "pip install -e '.[dev]'",
+    "remoteUser": "vscode"
+}
