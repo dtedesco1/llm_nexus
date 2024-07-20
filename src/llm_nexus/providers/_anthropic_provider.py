@@ -60,9 +60,13 @@ class AnthropicProvider(ModelInterface, BaseModel):
     def provider_class_function_call(
         self,
         function_call_parameters: FunctionCallParameters,
-        return_array: bool = False,  # TODO: Add array function calling support
+        return_array: bool = False,
     ) -> List[Dict]:
         prompt = f"{HUMAN_PROMPT} You respond only with *valid* json.\n\nPlease respond to the following prompt:  {function_call_parameters.user_prompt}\n\n{function_call_parameters.function.to_dict()}\n\n You reply with a json object whose keys are *exactly* {function_call_parameters.function.expected_arguments()}, with values of each key in their appropriate types. {AI_PROMPT}"
+
+        if return_array:
+            prompt = f"{HUMAN_PROMPT} You respond only with *valid* json.\n\nPlease respond to the following prompt:  {function_call_parameters.user_prompt}\n\n{function_call_parameters.function.to_dict()}\n\n You reply with a json array of objects whose keys are *exactly* {function_call_parameters.function.expected_arguments()}, with values of each key in their appropriate types. {AI_PROMPT}"
+
         completion = Anthropic().completions.create(
             model=function_call_parameters.model,
             prompt=prompt,
@@ -86,13 +90,27 @@ class AnthropicProvider(ModelInterface, BaseModel):
                 result: Dict = json.loads(response_str)
         except json.decoder.JSONDecodeError as exception:
             log.error(
-                "{}\nFunction call result did not return valid JSON. Please try again. What was returned:\n{}\n".format(
-                    exception, completion.completion
-                )
+                "%s\nFunction call result did not return valid JSON. Please try again. What was returned:\n%s\n",
+                exception,
+                completion.completion,
             )
-            raise exception
-        if not return_array:
-            result = {"array": [result]}
+            # Attempt to self-heal the response
+            log.info("Attempting to self-heal the response.")
+            completion_parameters = CompletionParameters(
+                instructions=f"You reformat poorly structured JSON as proper JSON according to the following schema: {function_call_parameters.function.expected_arguments()}\nStrictly match the required types. Replace all single quotes surrounding keys with double quotes.",
+                prompt=f"Please reformat this according to the schema:\n{completion.completion}",
+                model=function_call_parameters.model,
+                temperature=function_call_parameters.temperature,
+            )
+            self_heal_attempt = self.provider_class_completion(completion_parameters)
+            log.info("Self-heal attempt result: %s\n", self_heal_attempt)
+            if isinstance(self_heal_attempt, dict):
+                result: Dict = self_heal_attempt
+            else:
+                raise ValueError(
+                    f"Anthropic function call result did not return valid JSON. Please try again. What was returned:\n{completion.completion}\n"
+                ) from exception
+        result = {"array": result}
         return result
 
     def provider_class_function_result_check(
