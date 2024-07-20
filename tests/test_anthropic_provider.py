@@ -53,6 +53,44 @@ class TestAnthropicProvider(unittest.TestCase):
             temperature=0.8,
         )
 
+    def test_provider_class_function_call_with_array(self):
+        function = Function(
+            name="underrated_historical_events",
+            description="Name 3 underrated historical AD events based on the user's request",
+            arguments=[
+                Argument(
+                    name="event",
+                    param_type=ParamType.STRING,
+                    description="The name of the event.",
+                ),
+                Argument(
+                    name="year",
+                    param_type=ParamType.INTEGER,
+                    description="The starting year of the event.",
+                ),
+                Argument(
+                    name="reasoning",
+                    param_type=ParamType.STRING,
+                    description="A brief description of why you feel this event is underrated.",
+                ),
+            ],
+        )
+
+        function_call_parameters = FunctionCallParameters(
+            user_prompt="What are some underrated AD events in African history?",
+            function=function,
+            model=test_model,
+            temperature=0.8,
+        )
+
+        result = self.provider.provider_class_function_call(
+            function_call_parameters=function_call_parameters,
+            return_array=True,
+        )
+
+        # Assert the result is not empty
+        self.assertTrue(result)
+
     def test_provider_class_completion(self):
         result = self.provider.provider_class_completion(self.completion_parameters)
         # Assert the result is not empty
@@ -65,6 +103,7 @@ class TestAnthropicProvider(unittest.TestCase):
         )
         # Assert the result is not empty
         self.assertTrue(result)
+        print(result)
         log.debug(result)
 
     def test_provider_class_function_result_check(self):
