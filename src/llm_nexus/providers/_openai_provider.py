@@ -1,3 +1,9 @@
+"""
+This module provides access to OpenAI's language models through the OpenAIProvider class.
+
+The OpenAIProvider class provides methods for generating generic completions and function calls using the language model provider.
+"""
+
 import json
 import logging
 import re
@@ -8,11 +14,7 @@ from pydantic import BaseModel
 
 from .._logging.log import log
 from .._utils.completions import CompletionParameters
-from .._utils.function_calls import (
-    Argument,
-    Function,
-    FunctionCallParameters,
-)
+from .._utils.function_calls import Function, FunctionCallParameters
 
 # from openai.error import InvalidRequestError
 from ._model_interface import ModelInterface

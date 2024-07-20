@@ -4,10 +4,7 @@ from typing import Dict, List
 from pydantic import BaseModel
 
 from .._utils.completions import CompletionParameters
-from .._utils.function_calls import (
-    Function,
-    FunctionCallParameters,
-)
+from .._utils.function_calls import Function, FunctionCallParameters
 
 
 class ModelInterface(ABC, BaseModel):

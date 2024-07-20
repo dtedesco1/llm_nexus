@@ -1,3 +1,11 @@
+"""
+This module provides the ModelProvider class for LLM Nexus.
+
+The ModelProvider class offers a unified interface for interacting with
+multiple Language Model providers, including OpenAI, Anthropic, and Google AI.
+It supports text completions and function calls across different providers.
+"""
+
 import os
 from typing import Any, Dict, List, Optional
 
@@ -5,12 +13,7 @@ from pydantic import BaseModel
 
 from ._logging.log import log
 from ._utils.completions import CompletionParameters
-from ._utils.function_calls import (
-    Argument,
-    Function,
-    FunctionCallParameters,
-    ParamType,
-)
+from ._utils.function_calls import Function, FunctionCallParameters
 from .providers._anthropic_provider import AnthropicProvider
 from .providers._googleai_provider import GoogleAIProvider
 from .providers._model_interface import ModelInterface
@@ -150,18 +153,26 @@ class ModelProvider(BaseModel):
                     return_array=return_array,
                 )
                 log.debug(
-                    f"{model_name} Model function call result received for function {function.name}. {len(result)} elements in the result."
+                    "%s Model function call result received for function %s. %d elements in the result.",
+                    model_name,
+                    function.name,
+                    len(result),
                 )
                 check = provider.provider_class_function_result_check(function, result)
                 i += 1
-            except Exception as e:
+            except (ValueError, RuntimeError) as e:
                 log.warning(
-                    f"Error generating function call for {model_name}:\n```{e}```\nTrying again..."
+                    "Error generating function call for %s:\n```%s```\nTrying again...",
+                    model_name,
+                    e,
                 )
                 i += 1
         if not check:
             log.error(
-                f"Function call result for {model_name} does not match expected arguments.\nExpected: {function.arguments}\nActual: {result}"
+                "Function call result for %s does not match expected arguments.\nExpected: %s\nActual: %s",
+                model_name,
+                function.arguments,
+                result,
             )
             raise ValueError(
                 f"Function call result for {model_name} does not match expected arguments.\nExpected: {function.arguments}\nActual: {result}"

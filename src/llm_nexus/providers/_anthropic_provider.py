@@ -7,11 +7,7 @@ from pydantic import BaseModel
 
 from .._logging.log import log
 from .._utils.completions import CompletionParameters
-from .._utils.function_calls import (
-    Argument,
-    Function,
-    FunctionCallParameters,
-)
+from .._utils.function_calls import Argument, Function, FunctionCallParameters
 from ._model_interface import ModelInterface
 
 

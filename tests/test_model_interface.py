@@ -3,7 +3,6 @@ from typing import Dict
 
 from pydantic import BaseModel
 
-from src.llm_nexus.providers._model_interface import ModelInterface
 from src.llm_nexus._utils.completions import CompletionParameters
 from src.llm_nexus._utils.function_calls import (
     Argument,
@@ -11,6 +10,7 @@ from src.llm_nexus._utils.function_calls import (
     FunctionCallParameters,
     ParamType,
 )
+from src.llm_nexus.providers._model_interface import ModelInterface
 
 
 class _ConcreteModel(ModelInterface, BaseModel):
