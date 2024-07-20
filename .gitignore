@@ -12,3 +12,7 @@ logs/
 
 # Ignore .pypirc files
 .pypirc
+
+# Ignore build and dist directories
+build/
+dist/
