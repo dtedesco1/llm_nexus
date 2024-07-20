@@ -1,4 +1,6 @@
-from setuptools import setup, find_packages
+"""Setup file for the llm_nexus package."""
+
+from setuptools import find_packages, setup
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -6,12 +8,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="llm_nexus",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Daniel Tedesco",
+    author_email="dtedesco1@gmail.com",
     description="A unified interface for multiple LLM providers",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/llm_nexus",
+    url="https://github.com/dtedesoc1/llm_nexus",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     classifiers=[
