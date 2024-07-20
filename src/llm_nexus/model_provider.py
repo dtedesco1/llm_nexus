@@ -42,7 +42,7 @@ class ModelProvider(BaseModel):
     default_provider: str = "openai"
     default_model: str = "gpt-3.5-turbo"
     default_temperature: float = 0.8
-    default_max_tokens: int = 20
+    default_max_tokens: int = 1000
     providers: Dict[str, ModelInterface] = {}
 
     def __init__(
@@ -88,8 +88,8 @@ class ModelProvider(BaseModel):
         Args:
             instructions (str): The instructions for the chat completion.
             user_prompt (str): The prompt for the chat completion.
-            provider (str): The language model provider to use.
-            model (str): The language model to use.
+            provider_name (str): The language model provider to use.
+            model_name (str): The language model to use.
             temperature (float): The temperature to use for the chat completion.
             max_tokens (int): The maximum number of tokens to generate.
 
