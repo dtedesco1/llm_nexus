@@ -7,13 +7,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="llm-nexus",  # This is the PyPI distribution name
-    version="0.1.1",
+    version="0.1.2",
     author="Daniel Tedesco",
     author_email="dtedesco1@gmail.com",
     description="A unified interface for multiple LLM providers",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dtedesoc1/llm_nexus",
+    url="https://github.com/dtedesco1/llm_nexus",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     classifiers=[

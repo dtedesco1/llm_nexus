@@ -33,6 +33,7 @@ result = provider.completion(
 )
 
 print(result)
+# Example response:  "Yes, a rose's fragrance can't be beat."
 ```
 
 For function calls:
@@ -61,6 +62,26 @@ result = provider.function_call(
 )
 
 print(result)
+# Example reponse: 
+# {
+#     "array": [
+#         {
+#             "event": "Kingdom of Aksum",
+#             "year": 100,
+#             "reasoning": "One of the most powerful early medieval empires in East Africa, yet not widely known or studied in history classes."
+#         },
+#         {
+#             "event": "Mali Empire",
+#             "year": 1235,
+#             "reasoning": "A prosperous West African empire centered in Mali that controlled trade routes across the Sahara. Advanced cities and universities but its achievements are not always emphasized."
+#         },
+#         {
+#             "event": "Great Zimbabwe",
+#             "year": 1450,
+#             "reasoning": "Sophisticated city and trade center indicating a highly organized society, but origins are still debated and its influence on the region could be discussed more."
+#         }
+#     ]
+# }
 ```
 
 ## Supported Python Versions
