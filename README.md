@@ -35,7 +35,39 @@ result = provider.completion(
 print(result)
 ```
 
-For more detailed usage instructions, please refer to the documentation.
+For function calls:
+
+```python
+from llm_nexus import ModelProvider, Function, Argument, ParamType
+
+provider = ModelProvider(openai_api_key="your-openai-key", anthropic_api_key="your-anthropic-key", googleai_api_key="your-googleai-key")
+
+function = Function(
+    name="get_weather",
+    description="Get the weather for a location",
+    arguments=[
+        Argument(name="location", param_type=ParamType.STRING, description="The city and state, e.g. San Francisco, CA"),
+        Argument(name="unit", param_type=ParamType.STRING, description="Temperature unit (celsius/fahrenheit)")
+    ]
+)
+
+result = provider.function_call(
+    user_prompt="What's the weather like in New York?",
+    function=function,
+    provider_name="openai",
+    model_name="gpt-3.5-turbo"
+)
+
+print(result)
+```
+
+## Supported Python Versions
+
+LLM Nexus supports Python 3.7 and above.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
