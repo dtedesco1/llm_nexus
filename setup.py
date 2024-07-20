@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="llm-nexus",  # This is the PyPI distribution name
-    version="0.1.0",
+    version="0.1.1",
     author="Daniel Tedesco",
     author_email="dtedesco1@gmail.com",
     description="A unified interface for multiple LLM providers",

@@ -53,7 +53,7 @@ function = Function(
 )
 
 result = provider.function_call(
-    user_prompt="What are some underrated events in African history?",
+    user_prompt="What are some underrated A.D. events in African history?",
     function=function,
     provider_name="openai",
     model_name="gpt-3.5-turbo",
