@@ -11,7 +11,7 @@ from src.llm_nexus._utils.function_calls import (
 )
 from src.llm_nexus.providers._anthropic_provider import AnthropicProvider
 
-test_model = "claude-instant-1.2"
+test_model = "claude-3-5-haiku-20241022"
 
 
 class TestAnthropicProvider(unittest.TestCase):

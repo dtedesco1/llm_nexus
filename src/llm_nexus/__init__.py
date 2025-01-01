@@ -2,6 +2,8 @@
 This module provides a unified interface for multiple language model providers.
 """
 
+__version__ = "0.2.0"  # Major version bump for breaking change: Anthropic API switch
+
 # Import utility functions and classes
 from ._utils.completions import CompletionParameters
 from ._utils.function_calls import (
@@ -30,4 +32,5 @@ __all__ = [
     "AnthropicProvider",
     "GoogleAIProvider",
     "OpenAIProvider",
+    "__version__",
 ]

@@ -11,7 +11,7 @@ from src.llm_nexus._utils.function_calls import (
 from src.llm_nexus.model_provider import ModelProvider
 
 test_providers = ["openai", "anthropic", "googleai"]
-test_models = ["gpt-3.5-turbo", "claude-instant-1.2", "gemini-1.5-pro-latest"]
+test_models = ["gpt-3.5-turbo", "claude-3-5-haiku-20241022", "gemini-1.5-pro-latest"]
 
 # # Test for OpenAI only
 # test_providers = ["openai"]
@@ -19,7 +19,7 @@ test_models = ["gpt-3.5-turbo", "claude-instant-1.2", "gemini-1.5-pro-latest"]
 
 # # Test for Anthropic only
 # test_providers = ["anthropic"]
-# test_models = ["claude-instant-1.2"]
+# test_models = ["claude-3-5-haiku-20241022"]
 
 # # For testing Google AI only
 # test_providers = ["googleai"]
